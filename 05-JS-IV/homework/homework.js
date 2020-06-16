@@ -32,6 +32,7 @@ function invocarMetodo(objeto, metodo) {
   // Invoca ese método
   // Nada necesita ser devuelto ("returned")
   // Tu código:
+  //objeto[metodo]{}; en clase
   objeto[metodo];
 }
 
@@ -55,23 +56,20 @@ function nuevoUsuario(nombre, email, password) {
   // Crea un nuevo objeto con las propiedades coincidiendo con los argumentos que se pasan a la función
   // Devuelve el objeto
   // Tu código:
-  var n = nombre;
-  var e = email;
-  var p = password;
-  var usuario =
-  {
-    nombre: n,
-    email: e,
-    password: p
+  var obj = {
+  nombre: nombre,
+  email: email,
+  password: password,
   };
-return usuario;
+return obj;
 }
 
 function tieneEmail(usuario) {
   // Devuelve "true" si el usuario tiene un valor definido para la propiedad "email"
   // De lo contratio, devuelve "false"
   // Tu código:
-  if(usuario.email !== undefined || usuario.email !== null )
+  //if(usuario.email !== undefined || usuario.email !== null )
+  if(usuario['email'])
     {return true;}
   else
     {return false;}
@@ -83,10 +81,11 @@ function tienePropiedad(objeto, propiedad) {
   // "propiedad" es un string
   // De lo contrario, devuelve "false"
   // Tu código:
-  if(objeto[propiedad] !== null)
+  if(objeto[propiedad])
     {return true;}
   else
     {return false;}
+  //objeto.hasOwnProperty(propiedad); otra manera
 }
 
 function verificarPassword(usuario, password) {
@@ -94,17 +93,20 @@ function verificarPassword(usuario, password) {
   // Devuelve "true" si coinciden
   // De lo contrario, devuelve "false"
   // // Tu código:
-  if(usuario.password == password)
-    {return true;}
-  else
-    {return false;}
+  //if(usuario.password == password)
+  //  {return true;}
+  //else
+  //  {return false;}
+
+  return usuario['password'] === password; 
+  // si son iguales devuelve true
 }
 
 function actualizarPassword(usuario, nuevaPassword) {
   // Reemplaza la contraseña existente en el objeto "usuario" con el valor de "nuevagPassword"
   // Devuelve el objeto
   // Tu código:
-  usuario.password = 'nuevaPassword';
+  usuario.password = nuevaPassword;
   return usuario;
 }
 
@@ -123,9 +125,13 @@ function pasarUsuarioAPremium(usuarios) {
   // Define cada propiedad "esPremium" de cada objeto como "true"
   // Devuelve el array de usuarios
   // Tu código:
-  for(let i=0; i < usuarios.lenght; i++)
+  //var usuarios={
+  //  {esPremium: true},
+  //  {esPremium: false},
+  //  {esPremium: true}}
+  for(var i=0; i < usuarios.length; i++)
   {
-    usuarios[i]['esPremium'] = true;
+    usuarios[i].esPremium = true;
   }
   return usuarios;
 }
@@ -138,9 +144,9 @@ function sumarLikesDeUsuario(usuario) {
   // Devuelve la suma
   // Tu código:
   var lik = 0;
-  for(let i = 0; i < usuario.posts.lenght; i++)
+  for(var i = 0; i < usuario.posts.length; i++)
   {
-      lik= lik + usuario['posts'[i]]['likes'];
+      lik = lik + usuario.posts[i].likes;
   }
   return lik;
 }
